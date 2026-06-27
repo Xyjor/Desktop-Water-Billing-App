@@ -28,7 +28,9 @@ const defaultDB: MockDB = {
   customers: [
     {
       id: 1,
-      name: "John Doe",
+      customer_name: "John Doe",
+      tapstand_no: "T5-01",
+      tapstand_leader: "Jane Smith",
       address: "123 Main St",
       meter_number: "M-001",
       contact_number: "555-0101",
@@ -44,7 +46,12 @@ function getMockDB(): MockDB {
   const data = localStorage.getItem("water_billing_mock_db");
   if (data) {
     try {
-      return JSON.parse(data);
+      const parsed = JSON.parse(data);
+      // Ensure backwards compatibility with old local storage schema
+      if (parsed.customers && parsed.customers.length > 0 && !parsed.customers[0].customer_name) {
+        parsed.customers = defaultDB.customers;
+      }
+      return parsed;
     } catch (e) {
       return defaultDB;
     }
