@@ -91,10 +91,11 @@ export default function LoginScreen() {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-[10px] leading-relaxed text-slate-500">
-          First-time setup uses the default administrator account. You will be required to change
-          the password immediately after signing in.
-        </p>
+        <div className="mt-6 text-center text-[10px] leading-relaxed text-slate-500 bg-slate-950/50 p-3 rounded-xl border border-slate-800">
+          <p className="font-bold text-slate-400 mb-1">Demo Credentials:</p>
+          <p>Username: <code className="text-emerald-400 font-bold bg-slate-900 px-1 rounded">admin</code></p>
+          <p>Password: <code className="text-emerald-400 font-bold bg-slate-900 px-1 rounded">admin123</code></p>
+        </div>
       </div>
     </div>
   );

@@ -114,14 +114,13 @@ export async function invoke<T>(
 
       case "get_dashboard_stats":
         const totalAmount = db.billingRecords.reduce((sum, r) => sum + (r.total_amount || 0), 0);
-        const collectedAmount = db.billingRecords.filter(r => r.status === 'paid').reduce((sum, r) => sum + (r.total_amount || 0), 0);
+        const totalConsumption = db.billingRecords.reduce((sum, r) => sum + (r.total_consumption || 0), 0);
+        const uniqueTapstands = new Set(db.billingRecords.map(r => r.tapstand_no)).size;
         return {
-          total_customers: db.customers.length,
-          active_customers: db.customers.filter((c) => c.status === "active").length,
-          total_revenue: totalAmount,
-          collected_revenue: collectedAmount,
-          pending_bills: db.billingRecords.filter((r) => r.status === "pending").length,
-          recent_records: db.billingRecords.slice(0, 5),
+          total_statements: db.billingRecords.length,
+          total_consumption: totalConsumption,
+          total_amount: totalAmount,
+          unique_tapstands: uniqueTapstands,
         } as unknown as T;
 
       case "get_customers":
