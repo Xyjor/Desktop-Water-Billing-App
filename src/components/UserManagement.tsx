@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { invoke } from "@tauri-apps/api/core";
+import { invoke } from "../services/api";
 import { Users, UserPlus, Trash2, Key, AlertCircle, CheckCircle2, RefreshCw } from "lucide-react";
 
 interface User {

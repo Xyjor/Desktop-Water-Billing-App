@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { invoke } from "@tauri-apps/api/core";
+import { invoke } from "../services/api";
 import { 
   Receipt, 
   Droplet, 

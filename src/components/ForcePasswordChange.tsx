@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
+import { invoke } from "../services/api";
 import { Lock, AlertCircle, CheckCircle2, RefreshCw } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
