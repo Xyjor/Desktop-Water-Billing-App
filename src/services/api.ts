@@ -24,7 +24,52 @@ const defaultDB: MockDB = {
       created_at: new Date().toISOString(),
     },
   ],
-  billingRecords: [],
+  billingRecords: [
+    {
+      id: 1719543000000,
+      statement_no: "STMT-123456",
+      date_issued: "2024-05-20",
+      customer_name: "John Doe",
+      tapstand_no: "T5-01",
+      tapstand_leader: "Jane Smith",
+      water_rate: 15.00,
+      present_reading: 105.0,
+      previous_reading: 90.0,
+      total_consumption: 15.0,
+      period_from: "2024-04-20",
+      period_to: "2024-05-20",
+      arrears: 0.00,
+      surcharge: 0.00,
+      others: 0.00,
+      total_amount: 225.00,
+      pay_before: "2024-06-05",
+      received_by: null,
+      status: "pending",
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 1719543000001,
+      statement_no: "STMT-123457",
+      date_issued: "2024-05-21",
+      customer_name: "Maria Garcia",
+      tapstand_no: "T2-11",
+      tapstand_leader: "Peter Parker",
+      water_rate: 15.00,
+      present_reading: 42.0,
+      previous_reading: 38.0,
+      total_consumption: 4.0,
+      period_from: "2024-04-21",
+      period_to: "2024-05-21",
+      arrears: 50.00,
+      surcharge: 5.00,
+      others: 0.00,
+      total_amount: 115.00,
+      pay_before: "2024-06-06",
+      received_by: null,
+      status: "paid",
+      created_at: new Date().toISOString()
+    }
+  ],
   customers: [
     {
       id: 1,
@@ -37,13 +82,35 @@ const defaultDB: MockDB = {
       status: "active",
       created_at: new Date().toISOString(),
     },
+    {
+      id: 2,
+      customer_name: "Maria Garcia",
+      tapstand_no: "T2-11",
+      tapstand_leader: "Peter Parker",
+      address: "456 Elm St",
+      meter_number: "M-002",
+      contact_number: "555-0202",
+      status: "active",
+      created_at: new Date().toISOString(),
+    },
+    {
+      id: 3,
+      customer_name: "Bruce Wayne",
+      tapstand_no: "T8-04",
+      tapstand_leader: "Clark Kent",
+      address: "1007 Mountain Drive",
+      meter_number: "M-003",
+      contact_number: "555-0303",
+      status: "active",
+      created_at: new Date().toISOString(),
+    }
   ],
   auditLogs: [],
   session: null,
 };
 
 function getMockDB(): MockDB {
-  const data = localStorage.getItem("water_billing_mock_db");
+  const data = sessionStorage.getItem("water_billing_mock_db");
   if (data) {
     try {
       const parsed = JSON.parse(data);
@@ -60,7 +127,7 @@ function getMockDB(): MockDB {
 }
 
 function saveMockDB(db: MockDB) {
-  localStorage.setItem("water_billing_mock_db", JSON.stringify(db));
+  sessionStorage.setItem("water_billing_mock_db", JSON.stringify(db));
 }
 
 function addAuditLog(db: MockDB, action: string, details: string) {
